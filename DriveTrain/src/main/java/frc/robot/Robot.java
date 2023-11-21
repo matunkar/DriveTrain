@@ -6,11 +6,13 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.CubeShooter;
 
 
 public class Robot extends TimedRobot {
 
   public DriveTrain driveTrain = DriveTrain.getInstance();
+  public CubeShooter cubeShooter = CubeShooter.getInstance();
 
   @Override
   public void robotInit() {
