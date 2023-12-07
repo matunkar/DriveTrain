@@ -10,13 +10,14 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class CubeShooter extends SubsystemBase {
 
-    private CANSparkMax leftShooterMotor = new CANSparkMax(0, MotorType.kBrushless);
-    private CANSparkMax rightShooterMotor = new CANSparkMax(0, MotorType.kBrushless);
+    private CANSparkMax shooterMotor = new CANSparkMax(0, MotorType.kBrushless);
     private CANSparkMax feederMotor = new CANSparkMax(0, MotorType.kBrushless);
 
-
+    private relativeEncoder shooterEncoder = shooterMotor.getEncoder();
+    private relativeEncoder feederEncoder = feederMotor.getEncoder();
 
     private double shooterSpeed = CubeShooterConstants.kDefaultShooterSpeed;
+    private double feederSpeed = CubeShooterConstants.kFeederMotorSpeed;
 
     private static CubeShooter instance;
 
@@ -28,25 +29,22 @@ public class CubeShooter extends SubsystemBase {
     }
 
     private CubeShooter() {
-        leftShooterMotor.restoreFactoryDefaults();
-        rightShooterMotor.restoreFactoryDefaults();
+        shooterMotor.restoreFactoryDefaults();
         feederMotor.restoreFactoryDefaults();
-        leftShooterMotor.burnFlash();
-        rightShooterMotor.burnFlash();
+        shooterMotor.burnFlash();
         feederMotor.burnFlash();
-
-        rightShooterMotor.follow(leftShooterMotor, true);
 
     }
 
     public void run() {
-        leftShooterMotor.set(shooterSpeed);
+        shooterMotor.set(shooterSpeed);
     }
     public void feedIn() {
-        feederMotor.set(-CubeShooterConstants.kFeederMotorSpeed);
+        feederMotor.set(-feederSpeed);
     }
     public void stop() {
-        leftShooterMotor.set(0);
+        shooterMotor.set(0);
         feederMotor.set(0);
     }
 }
+
