@@ -13,8 +13,8 @@ public class CubeShooter extends SubsystemBase {
     private CANSparkMax shooterMotor = new CANSparkMax(0, MotorType.kBrushless);
     private CANSparkMax feederMotor = new CANSparkMax(0, MotorType.kBrushless);
 
-    private relativeEncoder shooterEncoder = shooterMotor.getEncoder();
-    private relativeEncoder feederEncoder = feederMotor.getEncoder();
+    private RelativeEncoder shooterEncoder = shooterMotor.getEncoder();
+    private RelativeEncoder feederEncoder = feederMotor.getEncoder();
 
     private double shooterSpeed = CubeShooterConstants.kDefaultShooterSpeed;
     private double feederSpeed = CubeShooterConstants.kFeederMotorSpeed;
@@ -45,6 +45,12 @@ public class CubeShooter extends SubsystemBase {
     public void stop() {
         shooterMotor.set(0);
         feederMotor.set(0);
+    }
+    protected double getVeloctiy() {
+        return shooterEncoder.getVelocity();
+    }
+    protected double getSpeed() {
+        return this.shooterSpeed;
     }
 }
 
