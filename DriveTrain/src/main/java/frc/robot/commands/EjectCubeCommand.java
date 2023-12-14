@@ -3,10 +3,10 @@ import frc.robot.subsystems.CubeShooter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 
-public class ShootCubeCommand extends CommandBase {
+public class EjectCubeCommand extends CommandBase {
     private CubeShooter cubeShooter = CubeShooter.getInstance();
 
-    public ShootCubeCommand() {
+    public EjectCubeCommand() {
         this.addRequirements(cubeShooter);
     }
 
@@ -17,10 +17,6 @@ public class ShootCubeCommand extends CommandBase {
 
     @Override
     public void execute() {
-        cubeShooter.run();
-    }
-
-    public void feedOut() {
         cubeShooter.feedOut();
     }
 

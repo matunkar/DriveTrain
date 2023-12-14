@@ -9,7 +9,8 @@ import frc.robot.libraries.XboxController1038;
 
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.CubeShooter;
-import frc.robot.commands.FeedCubeCommand;
+import frc.robot.commands.EjectCubeCommand;
+import frc.robot.commands.CubeAcquisitionCommand;
 import frc.robot.commands.ShootCubeCommand;
 
 
@@ -32,12 +33,15 @@ public class OperatorJoystick extends XboxController1038 {
         super(0);
 
         ShootCubeCommand shootCubeCommand = new ShootCubeCommand();
-        FeedCubeCommand feedCubeCommand = new FeedCubeCommand();
+        CubeAcquisitionCommand feedCubeCommand = new CubeAcquisitionCommand();
+        EjectCubeCommand ejectCubeCommand = new EjectCubeCommand();
 
         yButton
-            .onTrue(shootCubeCommand);
+            .whileTrue(shootCubeCommand);
         xButton 
             .onTrue(feedCubeCommand);
+        bButton 
+            .whileTrue(ejectCubeCommand);
 
 
     }
